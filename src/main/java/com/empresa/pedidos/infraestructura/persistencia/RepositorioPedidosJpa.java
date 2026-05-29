@@ -14,16 +14,19 @@ public class RepositorioPedidosJpa implements RepositorioPedidos {
 
     @Override
     public Pedido guardar(Pedido pedido) {
-        return repository.save(pedido);
+        return repository.save(PedidoEntidad.fromDomain(pedido)).toDomain();
     }
 
     @Override
     public java.util.List<Pedido> listar() {
-        return repository.findAll();
+        return repository.findAll().stream()
+                .map(PedidoEntidad::toDomain)
+                .toList();
     }
 
     @Override
     public java.util.Optional<Pedido> buscarPorId(Long id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .map(PedidoEntidad::toDomain);
     }
 }
