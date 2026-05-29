@@ -7,6 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.empresa.pedidos.dominio.puertos.ServicioNotificacion;
+import org.springframework.stereotype.Component;
+import org.springframework.context.event.EventListener;
+import com.empresa.pedidos.dominio.PedidoProcesadoEvent;
 
 @Entity
 public class Pedido {
