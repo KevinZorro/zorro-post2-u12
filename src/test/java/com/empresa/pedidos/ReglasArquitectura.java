@@ -9,14 +9,15 @@ import com.empresa.pedidos.dominio.puertos.ProcesadorPedido;
 
 @AnalyzeClasses(packages = "com.empresa.pedidos")
 public class ReglasArquitectura {
-    // Regla 1: El dominio no depende de infraestructura ni adaptadores
+    // Regla 1: El dominio no depende de infraestructura, adaptadores ni frameworks de infraestructura
     @ArchTest
     static final ArchRule dominioAislado = noClasses()
             .that().resideInAPackage("..dominio..")
             .should().dependOnClassesThat()
             .resideInAnyPackage(
                     "..infraestructura..", "..adaptadores..",
-                    "javax.persistence..", "org.springframework.mail..");
+                    "jakarta.persistence..", "javax.persistence..",
+                    "org.springframework..", "org.springframework.mail..");
     // Regla 2: Los controladores solo acceden a la Facade
     @ArchTest
     static final ArchRule controladorSoloFacade = classes()
